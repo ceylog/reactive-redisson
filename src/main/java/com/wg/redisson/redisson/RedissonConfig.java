@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit;
 public class RedissonConfig {
 
     @Bean
-    public RedissonReactiveClient redissonReactiveClient(RedissonClient redisson){
-        return Redisson.createReactive(redisson.getConfig());
+    public RedissonReactiveClient redissonReactiveClient(RedissonClient redissonClient){
+        return Redisson.createReactive(redissonClient.getConfig());
     }
 
     private static final String EXECUTOR_SERVICE_NAME = "rScheduledExecutor";

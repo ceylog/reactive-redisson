@@ -22,8 +22,6 @@ public class APIController {
 
     @GetMapping("/user")
     public Mono<String> get(){
-
-
         RAtomicLongReactive hello = redissonClient.getAtomicLong("hello");
         return hello.get().map(x-> "hello: "+x);
     }
