@@ -1,4 +1,4 @@
-package com.wg.redisson.redisson;
+package com.wg.redisson.redisson.task;
 
 import org.redisson.api.RedissonClient;
 import org.redisson.api.annotation.RInject;

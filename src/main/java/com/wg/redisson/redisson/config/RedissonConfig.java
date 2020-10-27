@@ -1,4 +1,4 @@
-package com.wg.redisson.redisson;
+package com.wg.redisson.redisson.config;
 
 import org.redisson.Redisson;
 import org.redisson.api.*;
