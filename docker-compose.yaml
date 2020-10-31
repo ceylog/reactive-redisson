@@ -8,4 +8,4 @@ services:
 networks:
   default:
     external:
-      name: docker-compose_db
+      name: db-group_db
