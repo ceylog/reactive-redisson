@@ -1,16 +1,15 @@
 package com.wg.redisson.redisson.api;
 
+
 import com.wg.redisson.redisson.entity.User;
+import com.wg.redisson.redisson.service.LoginEventService;
 import com.wg.redisson.redisson.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RAtomicLongReactive;
 import org.redisson.api.RedissonReactiveClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerSentEvent;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -25,6 +24,8 @@ public class APIController {
     private final RedissonReactiveClient redissonClient;
 
     private final UserService userService;
+
+    private final LoginEventService loginEventService;
 
     @GetMapping("/test")
     public Mono<String> get() {
@@ -42,13 +43,23 @@ public class APIController {
         return userService.findById(id);
     }
 
-    @GetMapping(value = "/sse",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Flux<ServerSentEvent<String>> sse(){
+    @GetMapping(value = "/sse", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ServerSentEvent<String>> sse() {
         return Flux.interval(Duration.ofMillis(1000)).map(val -> ServerSentEvent.<String>builder()
                 .id(UUID.randomUUID().toString())
                 .event("test_event")
                 .data(val.toString())
                 .build());
+    }
+
+    @PostMapping("/login/{username}")
+    public Mono<Void> login(@PathVariable String username) {
+        return loginEventService.save(username);
+    }
+
+    @GetMapping(value = "/login-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<CharSequence> getStream() {
+        return loginEventService.getStream();
     }
 
 }

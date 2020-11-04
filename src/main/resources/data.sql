@@ -1,0 +1,1 @@
+insert into t_user(name,email,create_time) values ('aaa','abc@bbb.cc',now());
