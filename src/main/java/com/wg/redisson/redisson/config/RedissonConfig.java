@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 public class RedissonConfig {
 
     @Bean
-    public RedissonReactiveClient redissonReactiveClient(RedissonClient redissonClient){
+    public RedissonReactiveClient redissonReactiveClient(RedissonClient redissonClient) {
         return Redisson.createReactive(redissonClient.getConfig());
     }
 

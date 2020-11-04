@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @Service
 public class LoginEventService {
     final LoginEventRepository repository;
-    final DatabaseClient       databaseClient;
+    final DatabaseClient databaseClient;
 
     final ConnectionFactory pgConnectionFactory;
     PostgresqlConnection sender;

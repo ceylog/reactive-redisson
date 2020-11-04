@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS t_user
 (
-    id serial PRIMARY KEY,
-    name varchar(20),
-    email varchar(50),
+    id          serial PRIMARY KEY,
+    name        varchar(20),
+    email       varchar(50),
     create_time timestamp
 );;
 
