@@ -25,9 +25,9 @@
     <form>
         <div class="uk-margin" uk-margin>
             <div uk-form-custom="target: true">
-                <input class="uk-input uk-form-width-medium" type="text" id="messageTxt" placeholder="Select online user">
+                <input class="uk-input uk-form-width-medium" type="text" id="messageTxt" placeholder="try typing something here please">
             </div>
-            <button class="uk-button" type="button" id="btn_send">send</button>
+            <button class="uk-button uk-button-primary" type="button" id="btn_send">send</button>
         </div>
     </form>
 </div>
@@ -39,6 +39,7 @@
 <script>
     let visitorId;
     let targetUserId;
+    const host = location.hostname+":"+location.port
     $(function() {
         (async () => {
             const fp = await FingerprintJS.load();
@@ -49,7 +50,7 @@
                 console.log(data)
             })
 
-            let ws = new WebSocket('ws://127.0.0.1:8080/ws/chat?userId='+visitorId)
+            let ws = new WebSocket('ws://'+host+'/ws/chat?userId='+visitorId)
             ws.onopen = evt => {
                 console.log(evt)
             }
@@ -57,7 +58,7 @@
                 getOnlineUser()
                 let parse = JSON.parse(evt.data);
                 $('#chatContainer').append('<div style="text-align: left"><span class="uk-label-success">'+parse.messageText+'</span></div>')
-                UIkit.notification({message: "from "+parse.userId+' say: ' + parse.messageText, status: 'success', pos: 'top-right'});
+                UIkit.notification({message: "from "+parse.userId+' say: ' + parse.messageText, status: 'success', pos: 'bottom-right'});
                 setTargetUser(parse.userId)
             }
 
@@ -84,18 +85,18 @@
         let source2 = new EventSource('api/user/login-stream');
         source2.onmessage = function (evt) {
             let user = JSON.parse(evt.data)
-            UIkit.notification({message: '用户' + user.username + "刚刚上线", status: 'success', pos: 'top-right'});
+            UIkit.notification({message: '用户' + user.username + "刚刚上线", status: 'success', pos: 'bottom-right'});
             getOnlineUser();
         }
 
-        let ws = new WebSocket("ws://127.0.0.1:8080/ws/echo");
+        let ws = new WebSocket("ws://"+host+"/ws/echo");
         ws.onopen = function(evt) {
             console.log("Connection open ...");
             ws.send("Hello WebSockets!");
         };
 
         ws.onmessage = function(evt) {
-            UIkit.notification({message: 'echo server say: ' + evt.data, status: 'success', pos: 'top-right'});
+            UIkit.notification({message: 'echo server say: ' + evt.data, status: 'success', pos: 'bottom-right'});
             ws.close()
         };
 
@@ -114,7 +115,8 @@
                     $('#onlineUsers').append("<li>"+v+"</li>");
                 }
             }
-            $("#onlineUsers li").on('click',function(e){
+            $("#onlineUsers li").on('click',function(){
+                this.className='uk-label-success'
                 setTargetUser(this.innerText)
             })
         })

@@ -46,12 +46,12 @@
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
 
-        <!--     <dependency>
-                 <groupId>org.springframework.boot</groupId>
-                 <artifactId>spring-boot-devtools</artifactId>
-                 <scope>runtime</scope>
-                 <optional>true</optional>
-             </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
         <dependency>
             <groupId>io.r2dbc</groupId>
             <artifactId>r2dbc-postgresql</artifactId>
@@ -112,7 +112,7 @@
                 </executions>
                 <configuration>
                     <imageName>ceylog/${project.artifactId}:${project.version}</imageName>
-                   <dockerDirectory>${basedir}</dockerDirectory>
+                    <dockerDirectory>${basedir}</dockerDirectory>
                 </configuration>
             </plugin>
 
