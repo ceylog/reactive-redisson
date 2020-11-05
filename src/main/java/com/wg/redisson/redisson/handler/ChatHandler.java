@@ -40,7 +40,7 @@ public class ChatHandler implements WebSocketHandler {
             if (userMap.containsKey(targetId)) {
                 WebSocketSession targetSession = userMap.get(targetId);
                 if (null != targetSession) {
-                    WebSocketMessage textMessage = targetSession.textMessage(message.getMessageText());
+                    WebSocketMessage textMessage = targetSession.textMessage(payload);
                     return targetSession.send(Mono.just(textMessage));
                 }
             }

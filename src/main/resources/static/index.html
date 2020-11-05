@@ -18,14 +18,15 @@
     在线用户：
     <ul class="uk-list uk-list-disc uk-list-primary" id="onlineUsers"></ul>
 </div>
+<div id="chatContainer" style="width: 300px;border:1px solid #cccccc;">
+</div>
+
 <div>
     <form>
         <div class="uk-margin" uk-margin>
-            <label>发消息给：</label>
             <div uk-form-custom="target: true">
-                <input class="uk-input uk-form-width-medium" type="text" id="targetUser" placeholder="Select online user" disabled>
+                <input class="uk-input uk-form-width-medium" type="text" id="messageTxt" placeholder="Select online user">
             </div>
-            <div><input class="uk-input uk-form-width-medium" type="text" id="messageTxt" placeholder="input text"/></div>
             <button class="uk-button" type="button" id="btn_send">send</button>
         </div>
     </form>
@@ -51,15 +52,13 @@
             let ws = new WebSocket('ws://127.0.0.1:8080/ws/chat?userId='+visitorId)
             ws.onopen = evt => {
                 console.log(evt)
-                let msg = {
-                    "targetId": visitorId,
-                    "messageText": "hello",
-                    "userId": visitorId
-                }
-                ws.send(JSON.stringify(msg));
             }
             ws.onmessage = evt => {
-                UIkit.notification({message: 'chat server say: ' + evt.data, status: 'success', pos: 'top-right'});
+                getOnlineUser()
+                let parse = JSON.parse(evt.data);
+                $('#chatContainer').append('<div style="text-align: left"><span class="uk-label-success">'+parse.messageText+'</span></div>')
+                UIkit.notification({message: "from "+parse.userId+' say: ' + parse.messageText, status: 'success', pos: 'top-right'});
+                setTargetUser(parse.userId)
             }
 
             $("#btn_send").on('click',function(){
@@ -70,6 +69,8 @@
                     "userId": visitorId
                 }
                 ws.send(JSON.stringify(msg));
+                $('#chatContainer').append('<div style="text-align: right"><span class="uk-label">'+txt+ '</span></div>')
+                $('#messageTxt').val('')
             })
         })();
 
@@ -102,26 +103,19 @@
             console.log("Connection closed.");
         };
     });
+    function setTargetUser(id){
+        targetUserId=id;
+    }
     function getOnlineUser(){
         $.get("api/user/onlineUsers",function(data){
             document.getElementById("onlineUsers").innerHTML="";
             for(v of data){
                 if(visitorId!= v){
                     $('#onlineUsers').append("<li>"+v+"</li>");
-                    // let node=document.createElement("li");
-                    // let textnode=document.createTextNode(v);
-                    // textnode.addEventListener("click",function(e){
-                    //
-                    //     this.className = 'uk-label-success'
-                    //     targetUserId = this.val
-                    // })
-                    // node.appendChild(textnode);
-                    // document.getElementById("onlineUsers").appendChild(node);
                 }
             }
             $("#onlineUsers li").on('click',function(e){
-                targetUserId = this.innerText;
-                $('#targetUser').val(targetUserId);
+                setTargetUser(this.innerText)
             })
         })
     }
