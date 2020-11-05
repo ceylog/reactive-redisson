@@ -1,7 +1,7 @@
 package com.wg.redisson.redisson.api;
 
-
-import com.wg.redisson.redisson.entity.User;
+import com.wg.redisson.redisson.entity.po.User;
+import com.wg.redisson.redisson.handler.ChatHandler;
 import com.wg.redisson.redisson.service.LoginEventService;
 import com.wg.redisson.redisson.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -12,8 +12,8 @@ import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
 import java.time.Duration;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -60,6 +60,11 @@ public class APIController {
     @GetMapping(value = "/login-stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<CharSequence> getStream() {
         return loginEventService.getStream();
+    }
+
+    @GetMapping("/onlineUsers")
+    public Set<String> getOnlineUser(){
+        return ChatHandler.userMap.keySet();
     }
 
 }

@@ -1,7 +1,7 @@
 package com.wg.redisson.redisson.service;
 
 import com.wg.redisson.redisson.dao.UserRepository;
-import com.wg.redisson.redisson.entity.User;
+import com.wg.redisson.redisson.entity.po.User;
 import com.wg.redisson.redisson.task.ScheduledRunnableTask;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.CronSchedule;

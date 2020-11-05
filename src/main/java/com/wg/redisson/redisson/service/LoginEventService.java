@@ -1,7 +1,7 @@
 package com.wg.redisson.redisson.service;
 
 import com.wg.redisson.redisson.dao.LoginEventRepository;
-import com.wg.redisson.redisson.entity.LoginEvent;
+import com.wg.redisson.redisson.entity.po.LoginEvent;
 import io.r2dbc.postgresql.api.Notification;
 import io.r2dbc.postgresql.api.PostgresqlConnection;
 import io.r2dbc.postgresql.api.PostgresqlResult;

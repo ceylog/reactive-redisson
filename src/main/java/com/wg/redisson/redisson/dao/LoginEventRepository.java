@@ -1,6 +1,6 @@
 package com.wg.redisson.redisson.dao;
 
-import com.wg.redisson.redisson.entity.LoginEvent;
+import com.wg.redisson.redisson.entity.po.LoginEvent;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 

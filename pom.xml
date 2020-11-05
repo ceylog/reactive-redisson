@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.wg.redisson</groupId>
-    <artifactId>redisson</artifactId>
+    <artifactId>reactive-redisson</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>redisson</name>
+    <name>reactive-redisson</name>
     <description>redisson spring reactive r2dbc</description>
 
     <properties>

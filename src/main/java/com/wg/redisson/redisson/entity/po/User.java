@@ -1,4 +1,4 @@
-package com.wg.redisson.redisson.entity;
+package com.wg.redisson.redisson.entity.po;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

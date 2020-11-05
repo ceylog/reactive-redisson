@@ -1,6 +1,6 @@
 package com.wg.redisson.redisson.dao;
 
-import com.wg.redisson.redisson.entity.User;
+import com.wg.redisson.redisson.entity.po.User;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
 

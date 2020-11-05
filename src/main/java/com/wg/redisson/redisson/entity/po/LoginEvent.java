@@ -1,4 +1,4 @@
-package com.wg.redisson.redisson.entity;
+package com.wg.redisson.redisson.entity.po;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
