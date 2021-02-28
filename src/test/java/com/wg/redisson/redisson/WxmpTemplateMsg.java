@@ -189,7 +189,7 @@ public class WxmpTemplateMsg {
             pd = JSON.parseObject(body).getJSONObject("page");
             System.out.println("page:"+pd.getIntValue("currPage"));
             list = pd.getJSONArray("list");
-            //batchSend(list);
+            batchSend(list);
         }
         //System.out.println("mp "+mp.size());
         //System.out.println("ct "+count);
@@ -202,7 +202,7 @@ public class WxmpTemplateMsg {
             //System.out.println("count="+count+" ,openid=" + u.getString("openid")+" ,nickname="+ u.getString("nickname"));
             //mp.put(u.getString("openid"),u.getString("nickname"));
             //count++;
-            sendTmpmsg(u.getString("openid"),u.getString("nickname"));
+            //sendTmpmsg(u.getString("openid"),u.getString("nickname"));
             System.out.println(Thread.currentThread().getName() + "发送成功: openid="+u.getString("openid")+", nickname="+u.getString("nickname"));
 
         });
